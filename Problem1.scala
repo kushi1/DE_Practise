@@ -43,5 +43,13 @@ val windowSpec = Window.partitionBy('campaign).orderBy('vcr.desc)
 vcr_df=vcr_df.withColumn("dummyCol",row_number().over(windowSpec)).drop("dummyCol").where('dummyCol<=5)
 saveAsCSV(vcr_df,"C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/vcr1")
 
+
+//2.VTR (Video Through Rate) [Hint: Video Views / Impressions] Video_Views
+var vtr_df=media_DF.where('Impressions.isNotNull)
+vtr_df=vtr_df.withColumn("vtr",$"video_views"/$"impressions").where('vtr.isNotNull).select($"partner",$"campaign",$"vtr")
+val vtr_windowspec=Window.partitionBy('campaign).orderBy('vtr.desc)
+vtr_df=vtr_df.withColumn("dummyCol",row_number().over(vtr_windowspec)).drop("dummyCol").where('dummyCol<=5)
+saveAsCSV(vtr_df,"C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/vtr1")
+
   }
 }
