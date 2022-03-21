@@ -1,0 +1,35 @@
+col1,col2
+Campaign,Campaign
+Placement ID,Placement_ID
+Placement Name,Placement_Name
+Ad/Creative ID,Ad_Creative_ID
+Ad/Creative Name,Ad_Creative_Name
+Social Objective,Social_Objective
+Impressions,Impressions
+Clicks,Clicks
+Video_Views,Video_Views
+Video_Completes,Video_Completes
+Engagements,Engagements
+DV Monitored Impresisons,DV _Monitored_Impresisons
+DV Eligible Impresisons,DV_Eligible_Impresisons
+DV Measured Impresisons,DV_Measure_ Impresisons
+DV Viewable Impresisons,DV_Viewable_Impresisons
+Date,Date
+ Actualized Spend , Actualized_Spend 
+Partner,Partner
+Tactic,Tactic
+Site,Site
+Device,Device
+Channel,Channel
+Sub-Tactic,Sub-Tactic
+Creative Name,Creative_Name
+Creative Ad format,Creative_Ad_format
+Creative Size,Creative_Size
+Video Length,Video_Length
+Audience Segment,Audience_Segment
+Unique Name,Unique_Name
+Served By,Served_By
+Package,Package
+Buy Type,Buy_Type
+Rate,Rate
+Placement's Daily Impressions,Placements_Daily_Impressions

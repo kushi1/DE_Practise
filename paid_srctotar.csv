@@ -1,0 +1,24 @@
+col1,col2
+Original_Keyword,Original_Keyword
+Revised_Keyword_String_2,Revised_Keyword_String_2
+Account,Account
+Match_Type,Match_Type
+Publisher,Publisher
+Brand/Non-Brand,Brand_Non-Brand
+Bidding_Category,Bidding_Category
+Impr,Impr
+Clicks,Clicks
+Total_Time_Spent_Conv,Total_Time_Spent_Conv
+Quality_Score,Quality_Score
+Impr. share %,Impr_share
+Impr. rate (Abs. Top) %,Impr_rate_Abs_Top
+Visits,Visits
+Page_Views,Page_Views
+Bounces,Bounces
+Average_Page_Depth,Average_Page_Depth
+Average_Time_Spent_on_Page,Average_Time_Spent_on_Page
+Search: Site search,Search_Site_search
+Review: Read,Review_Read
+Newsletter: Complete,Newsletter_Complete
+Clicks_to_Product_Pages,Clicks_to_Product_Pages
+Clicks_to_Retailer,Clicks_to_Retailer
