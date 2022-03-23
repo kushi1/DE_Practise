@@ -38,15 +38,15 @@ object Problem1 {
       paid_DF = paid_DF.withColumnRenamed(i, paid_srcTgtMap(i))
     }
     //1.VCR=videoviews/videocompletion
-    var vcr_df = media_DF.where('video_completes.isNotNull)
+    var vcr_df = media_DF.where('video_completes.isNotNull && 'video_views.isNotNull && length(trim('video_completes)) != 0 && 'video_completes =!= "0")
 
-    vcr_df = vcr_df.withColumn("vcr", $"video_views" / $"video_completes").where('vcr.isNotNull).select($"partner", $"Campaign", $"vcr")
+    vcr_df = vcr_df.withColumn("vcr", $"video_views" / $"video_completes").where($"vcr".isNotNull).select($"partner", $"Campaign", $"vcr")
     val windowSpec = Window.partitionBy('campaign).orderBy('vcr.desc)
     vcr_df = vcr_df.withColumn("dummyCol", row_number().over(windowSpec)).drop("dummyCol").where('dummyCol <= 5)
     saveAsCSV(vcr_df, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/vcr1")
 
     //2.VTR (Video Through Rate) [Hint: Video Views / Impressions] Video_Views
-    var vtr_df = media_DF.where('Impressions.isNotNull)
+    var vtr_df = media_DF.where('Impressions.isNotNull && 'video_views.isNotNull && length(trim('impressions)) != 0 && 'impressions != "0")
     vtr_df = vtr_df.withColumn("vtr", $"video_views" / $"impressions").where('vtr.isNotNull).select($"partner", $"campaign", $"vtr")
     val vtr_windowspec = Window.partitionBy('campaign).orderBy('vtr.desc)
     vtr_df = vtr_df.withColumn("dummyCol", row_number().over(vtr_windowspec)).drop("dummyCol").where('dummyCol <= 5)
