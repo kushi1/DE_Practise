@@ -22,8 +22,9 @@ object Problem1 {
     var media_DF = readCSV("C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/A_Data_Engineering_Practice_and_Hands_on_Coding_Challenge/Media_Campaigns_csv.csv")
     //only for ER mockup data
     //var media_DF = readCSV("C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/A_Data_Engineering_Practice_and_Hands_on_Coding_Challenge/Media_Campaigns_csv1.csv")
-    media_DF = media_DF.withColumn("Date", from_unixtime(unix_timestamp('Date, "MM-dd-yyyy"), "dd-MM-yyyy")).where('Date.isNotNull)
 
+    media_DF = media_DF.withColumn("Date", from_unixtime(unix_timestamp('Date, "MM-dd-yyyy"), "dd-MM-yyyy")).where('Date.isNotNull)
+    //to_date('date,"MM-dd-yyyy")
     var paid_DF = readCSV("C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/A_Data_Engineering_Practice_and_Hands_on_Coding_Challenge/Paid_Search_csv.csv")
 
     //column rename
@@ -56,9 +57,11 @@ object Problem1 {
     //1.CTR (Click Through Rate) [Hint: CTR = Clicks / Impressions]
     //2.CPC (Cost Per Click) [Hint: CPC = Total Cost of Clicks / Total Clicks]  //assuming totalcostofclicks=actualized_spend
 
-    var cmo_df = media_DF.where('impressions.isNotNull || length(trim('impressions)) != "0").withColumn("ctr", $"clicks" / $"impressions").withColumn("cpc", $"Actualized_spend" / $"clicks").select($"partner", $"campaign", $"device", $"ctr", $"cpc", month(to_date($"date", "dd-MM-yyyy")).as("campaign_mnth"))
+    var cmo_df = media_DF.where('impressions.isNotNull || length(trim('impressions)) != "0").withColumn("ctr", round($"clicks" / $"impressions", 2)).withColumn("cpc", round($"Actualized_spend" / $"clicks", 2)).select($"partner", $"campaign", $"device", $"ctr", $"cpc", month(to_date($"date", "dd-MM-yyyy")).as("campaign_mnth"))
 
-    var best_mnth = cmo_df.groupBy('campaign, 'device, 'partner, 'campaign_mnth).agg(max('ctr).as("ctr"), max('cpc).as("cpc")).select('campaign, 'device, 'partner, 'campaign_mnth.as("best_month"))
+    var best_mnth = cmo_df.groupBy('campaign, 'device, 'partner, 'campaign_mnth).agg(max('ctr).as("ctr"), max('cpc).as("cpc")).select('campaign, 'device, 'partner, 'campaign_mnth.as("best_month"), 'cpc, 'ctr)
+    val best_WindowSpec = Window.partitionBy('campaign, 'device, 'partner).orderBy('ctr.desc, 'cpc.desc)
+    best_mnth = best_mnth.withColumn("dummyCol", row_number().over(best_WindowSpec)).where('dummyCol === 1).drop("dummyCol")
 
     saveAsCSV(best_mnth, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/cmo_mnth")
 
@@ -70,7 +73,9 @@ object Problem1 {
     saveAsCSV(non_complete, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/non_com")
 
     //Calculate the total number of visits for unique keywords for each publisher for both branded and nonbranded searches
-    var vists_df = paid_DF.groupBy('publisher, 'Original_Keyword, 'Brand_Non_Brand).agg(count('Brand_Non_Brand).as("total_visits"))
+    var vists_df = paid_DF.groupBy('publisher, 'Original_Keyword, 'Brand_Non_Brand).agg(sum('visits).as("total_visits"))
+   
+    
     saveAsCSV(vists_df, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/visits")
 
     //Compare ER (Engagement Rate) for Video channels v/s Non-Video Channels? [Engagement R ate = Engagement / Impressions],engagements is null elimnateing
