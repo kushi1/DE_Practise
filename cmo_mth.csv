@@ -1,66 +1,29 @@
-Campaign,Device,Partner,best_month
-Campaign B,Cross-Platform,Hulu,8
-Campaign A,Mobile,Instagram,9
-Campaign B,Mobile,Facebook,9
-Campaign A,Cross-Platform,Pinterest,9
-Campaign A,Cross-Platform,Bumper,8
-Campaign A,Mobile,Bumper,9
-Campaign A,Desktop,Open Exchange,9
-Campaign A,Desktop,Facebook,9
-Campaign A,Mobile,Instagram,8
-Campaign A,Mobile,Instagram,7
-Campaign B,Cross-Platform,Pinterest,8
-Campaign B,Cross-Platform,Hulu,9
-Campaign B,Desktop,Facebook,8
-Campaign A,Mobile,Facebook,9
-Campaign A,Desktop,TripleLift,7
-Campaign B,Mobile,Instagram,9
-Campaign A,Desktop,TrueView,8
-Campaign A,Desktop,TripleLift,9
-Campaign A,Cross-Platform,Facebook,7
-Campaign B,Desktop,OMP,8
-Campaign B,Mobile,Instagram,8
-Campaign A,Mobile,TripleLift,8
-Campaign A,Desktop,Facebook,7
-Campaign A,Desktop,Facebook,8
-Campaign A,Cross-Platform,Facebook,8
-Campaign B,Desktop,TripleLift,8
-Campaign A,Desktop,Bumper,9
-Campaign A,Cross-Platform,Hulu,9
-Campaign A,Cross-Platform,Bumper,9
-Campaign A,Desktop,TripleLift,8
-Campaign A,Cross-Platform,Pinterest,7
-Campaign A,Mobile,TripleLift,7
-Campaign A,Mobile,Facebook,7
-Campaign A,Cross-Platform,TrueView,8
-Campaign A,Mobile,Open Exchange,8
-Campaign A,Cross-Platform,TrueView,9
-Campaign A,Mobile,Bumper,8
-Campaign B,Mobile,TripleLift,8
-Campaign A,Cross-Platform,Facebook,9
-Campaign A,Cross-Platform,Instagram,8
-Campaign B,Cross-Platform,Hulu,7
-Campaign A,Cross-Platform,Hulu,8
-Campaign A,Desktop,Bumper,8
-Campaign B,Cross-Platform,Google Preferred,9
-Campaign A,Cross-Platform,GP,7
-Campaign A,Mobile,Open Exchange,9
-Campaign B,Desktop,OMP,9
-Campaign A,Cross-Platform,Hulu,7
-Campaign B,Cross-Platform,Pinterest,9
-Campaign A,Cross-Platform,GP,9
-Campaign A,Desktop,Open Exchange,8
-Campaign A,Cross-Platform,Instagram,7
-Campaign B,Mobile,TripleLift,9
-Campaign B,Cross-Platform,Google Preferred,8
-Campaign A,Mobile,TrueView,8
-Campaign A,Mobile,TrueView,9
-Campaign A,Cross-Platform,Instagram,9
-Campaign A,Mobile,TripleLift,9
-Campaign A,Desktop,TrueView,9
-Campaign A,Cross-Platform,Pinterest,8
-Campaign B,Mobile,Facebook,8
-Campaign B,Desktop,Facebook,9
-Campaign A,Mobile,Facebook,8
-Campaign A,Cross-Platform,GP,8
-Campaign B,Mobile,OMP,8
+Campaign,Device,Partner,best_month,cpc,ctr
+Campaign A,Desktop,TripleLift,8,7.61,0.01
+Campaign A,Desktop,TrueView,8,107.22,0.2
+Campaign A,Cross-Platform,Hulu,7,282.55,0.01
+Campaign B,Mobile,Instagram,8,132.98,0.14
+Campaign A,Mobile,Instagram,8,129.41,0.13
+Campaign A,Mobile,TripleLift,8,7.96,0.0
+Campaign A,Cross-Platform,TrueView,9,80.12,0.01
+Campaign A,Mobile,Facebook,9,15.43,0.2
+Campaign B,Desktop,Facebook,8,45.78,0.0
+Campaign A,Cross-Platform,GP,8,147.45,0.0
+Campaign B,Cross-Platform,Pinterest,8,200.0,0.0
+Campaign B,Desktop,TripleLift,8,32.05,0.01
+Campaign B,Mobile,OMP,8,244.29,0.01
+Campaign B,Mobile,Facebook,8,26.58,0.33
+Campaign A,Desktop,Facebook,9,63.93,0.0
+Campaign B,Desktop,OMP,9,185.27,0.17
+Campaign A,Cross-Platform,Instagram,9,1.14,0.01
+Campaign A,Mobile,TrueView,9,104.76,0.03
+Campaign A,Cross-Platform,Bumper,8,75.51,0.0
+Campaign B,Cross-Platform,Hulu,9,1691.77,0.0
+Campaign A,Mobile,Bumper,8,231.4,0.0
+Campaign A,Desktop,Open Exchange,8,2.16,0.03
+Campaign A,Mobile,Open Exchange,9,13.37,0.01
+Campaign B,Mobile,TripleLift,9,15.7,0.33
+Campaign A,Cross-Platform,Pinterest,8,146.11,0.0
+Campaign A,Cross-Platform,Facebook,9,2.41,0.07
+Campaign A,Desktop,Bumper,8,100.64,0.0
+Campaign B,Cross-Platform,Google Preferred,8,204.5,0.0
