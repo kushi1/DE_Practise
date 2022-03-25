@@ -43,12 +43,15 @@ object Problem1 {
 
     vcr_df = vcr_df.withColumn("vcr", $"video_views" / $"video_completes").where($"vcr".isNotNull).select($"partner", $"Campaign", $"vcr")
     val windowSpec = Window.partitionBy('campaign).orderBy('vcr.desc)
+    vcr_df = vcr_df.groupBy('campaign, 'partner).agg(max('vcr).as("vcr"))
+
     vcr_df = vcr_df.withColumn("dummyCol", row_number().over(windowSpec)).drop("dummyCol").where('dummyCol <= 5)
     saveAsCSV(vcr_df, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/vcr1")
 
     //2.VTR (Video Through Rate) [Hint: Video Views / Impressions] Video_Views
     var vtr_df = media_DF.where('Impressions.isNotNull && 'video_views.isNotNull && length(trim('impressions)) != 0 && 'impressions != "0")
     vtr_df = vtr_df.withColumn("vtr", $"video_views" / $"impressions").where('vtr.isNotNull).select($"partner", $"campaign", $"vtr")
+    vtr_df = vtr_df.groupBy('campaign, 'partner).agg(max('vtr).as("vtr"))
     val vtr_windowspec = Window.partitionBy('campaign).orderBy('vtr.desc)
     vtr_df = vtr_df.withColumn("dummyCol", row_number().over(vtr_windowspec)).drop("dummyCol").where('dummyCol <= 5)
     saveAsCSV(vtr_df, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/vtr1")
@@ -57,10 +60,14 @@ object Problem1 {
     //1.CTR (Click Through Rate) [Hint: CTR = Clicks / Impressions]
     //2.CPC (Cost Per Click) [Hint: CPC = Total Cost of Clicks / Total Clicks]  //assuming totalcostofclicks=actualized_spend
 
-    var cmo_df = media_DF.where('impressions.isNotNull || length(trim('impressions)) != "0").withColumn("ctr", round($"clicks" / $"impressions", 2)).withColumn("cpc", round($"Actualized_spend" / $"clicks", 2)).select($"partner", $"campaign", $"device", $"ctr", $"cpc", month(to_date($"date", "dd-MM-yyyy")).as("campaign_mnth"))
+    var cmo_df = media_DF.where(('impressions.isNotNull || length(trim('impressions)) != "0") && ('clicks.isNotNull && length(trim('clicks)) != 0)).select($"partner", $"campaign", $"device", $"clicks", $"actualized_spend", $"impressions", month(to_date($"date", "dd-MM-yyyy")).as("campaign_mnth"))
+    cmo_df = cmo_df.groupBy('campaign, 'device, 'partner, 'campaign_mnth).agg(sum('clicks).as("total_clicks"), sum('actualized_spend).as("total_cost_clicks"), sum('impressions).as("impressions"))
 
-    var best_mnth = cmo_df.groupBy('campaign, 'device, 'partner, 'campaign_mnth).agg(max('ctr).as("ctr"), max('cpc).as("cpc")).select('campaign, 'device, 'partner, 'campaign_mnth.as("best_month"), 'cpc, 'ctr)
-    val best_WindowSpec = Window.partitionBy('campaign, 'device, 'partner).orderBy('ctr.desc, 'cpc.desc)
+    cmo_df = cmo_df.withColumn("ctr", round($"total_clicks" / $"impressions", 2)).withColumn("cpc", round($"total_cost_clicks" / $"total_clicks", 2)).select($"partner", $"campaign", $"device", $"ctr", $"cpc", $"campaign_mnth")
+
+    var best_mnth = cmo_df.groupBy('campaign, 'device, 'partner, 'campaign_mnth).agg(max('ctr).as("ctr"), max('cpc).as("cpc")).select('campaign, 'device, 'partner, 'campaign_mnth, 'cpc, 'ctr)
+    val best_WindowSpec = Window.partitionBy('campaign, 'device, 'partner).orderBy('cpc.desc, 'ctr.desc)
+
     best_mnth = best_mnth.withColumn("dummyCol", row_number().over(best_WindowSpec)).where('dummyCol === 1).drop("dummyCol")
 
     saveAsCSV(best_mnth, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/cmo_mnth")
@@ -74,8 +81,7 @@ object Problem1 {
 
     //Calculate the total number of visits for unique keywords for each publisher for both branded and nonbranded searches
     var vists_df = paid_DF.groupBy('publisher, 'Original_Keyword, 'Brand_Non_Brand).agg(sum('visits).as("total_visits"))
-   
-    
+
     saveAsCSV(vists_df, "C:/Users/Mounisra1/OneDrive/Desktop/LTI-RelatedDOC/Citi_practise_Doc/output/visits")
 
     //Compare ER (Engagement Rate) for Video channels v/s Non-Video Channels? [Engagement R ate = Engagement / Impressions],engagements is null elimnateing

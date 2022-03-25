@@ -1,11 +1,11 @@
-Partner,Campaign,vcr
-Facebook,Campaign A,40.0
-Instagram,Campaign A,40.0
-Instagram,Campaign A,32.0
-Instagram,Campaign A,31.0
-Facebook,Campaign A,30.0
-Facebook,Campaign B,51.0
-Facebook,Campaign B,30.0
-Instagram,Campaign B,27.75
-Facebook,Campaign B,24.0
-Pinterest,Campaign B,22.675757575757576
+Campaign,Partner,vcr
+Campaign A,Facebook,40.0
+Campaign A,Instagram,40.0
+Campaign A,Pinterest,22.70967741935484
+Campaign A,Open Exchange,2.0880687919318954
+Campaign A,Hulu,1.6666666666666667
+Campaign B,Facebook,51.0
+Campaign B,Instagram,27.75
+Campaign B,Pinterest,22.675757575757576
+Campaign B,OMP,17.24031007751938
+Campaign B,Google Preferred,1.21934039532598

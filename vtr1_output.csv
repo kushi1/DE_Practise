@@ -1,11 +1,11 @@
-Partner,Campaign,vtr
-GP,Campaign A,1.0586794258373207
-GP,Campaign A,1.0532368621477532
-GP,Campaign A,1.0526622940004822
-GP,Campaign A,1.02724920456093
-GP,Campaign A,1.0235111264617358
-OMP,Campaign B,1.1069285324604474
-OMP,Campaign B,1.0674586338565974
-OMP,Campaign B,1.0629432624113475
-OMP,Campaign B,1.033831003811944
-OMP,Campaign B,1.0330578512396693
+Campaign,Partner,vtr
+Campaign A,GP,1.0586794258373207
+Campaign A,Hulu,1.0
+Campaign A,TrueView,1.0
+Campaign A,Open Exchange,1.0
+Campaign A,Facebook,1.0
+Campaign B,OMP,1.1069285324604474
+Campaign B,Instagram,1.0
+Campaign B,Hulu,1.0
+Campaign B,Facebook,1.0
+Campaign B,Pinterest,1.0
